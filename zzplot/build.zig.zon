@@ -1,0 +1,10 @@
+.{
+    .name = "zzplot package",
+    .version = "0.0.0",
+    .paths = .{""},
+    .dependencies = .{
+        .nanovg_zon_name = .{
+            .path = "../nanovg",
+        },
+    },
+}

@@ -1,0 +1,15 @@
+To enable/disabel OpenGL "Sync to VBlank" from xwindows/xfce4:
+
+1)  Click on "Apps" tool bar at top of screen
+
+2)  Choose "Settings" on pull down menu
+
+3)  Choose NVIDIA XServer Settings
+
+4)  From NVIDIA Settings window:
+
+   a - click on OpenGL Settings
+
+   b - enable/disable with "Sync to VBank" 
+
+When checked, the max fps would be 60.  For example zig plotting, it is possible to acheive 1600 fps.

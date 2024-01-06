@@ -1,0 +1,10 @@
+.{
+    .name = "example packaging a zzplot and nanovg into an app",
+    .version = "0.0.0",
+    .paths = .{""},
+    .dependencies = .{
+        .zzplot_zon_name = .{
+            .path = "../zzplot",
+        },
+    },
+}
