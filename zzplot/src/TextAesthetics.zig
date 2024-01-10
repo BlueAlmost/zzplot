@@ -1,4 +1,4 @@
-const zzplot = @import("zzplot");
+const zzplot = @import("zzplot_import_name");
 const nvg = zzplot.nanovg;
 const Color = zzplot.Color;
 

@@ -30,8 +30,6 @@ pub fn main() !void {
 
     // nvg context creation goes after gladLoadGL
     const vg = try nvg.gl.init(allocator, .{
-        .antialias = true,
-        .stencil_strokes = true, //false=faster, true=better quality
         .debug = true,
     });
 
@@ -41,7 +39,6 @@ pub fn main() !void {
     const fig = try Figure.init(allocator, shared, vg, .{
         .title_str = "single plot with simple labels and a framerate display",
         .disp_fps = true,
-        .fps_beta = 0.9999, // only use this high value when NOT sync to vblank
     });
 
     const ax = try Axes.init(fig, .{

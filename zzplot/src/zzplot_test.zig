@@ -1,7 +1,9 @@
 const std = @import("std");
 
-const zzplot = @import("zzplot_import_name");
+const zzplot = @import("zzplot");
 
 test "zzplot dummy test" {
+
+    std.debug.print("just a dummy test - does nothing\n", .{});
     try std.testing.expectEqual(2, 2);
 }

@@ -37,8 +37,6 @@ pub fn main() !void {
 
     // nvg context creation goes after gladLoadGL
     const vg = try nvg.gl.init(allocator, .{
-        .antialias = true,
-        .stencil_strokes = true, //false=faster, true=better quality
         .debug = true,
     });
 

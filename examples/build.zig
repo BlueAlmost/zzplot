@@ -61,6 +61,9 @@ const Targ = struct {
     src: []const u8,
 
     pub fn build(self: Targ, b: *std.Build, target: anytype, optimize: anytype, run_step: anytype, test_step: anytype) void {
+
+        _ = test_step;
+
         var exe = b.addExecutable(.{
             .name = self.name,
             .root_source_file = .{ .path = self.src },
@@ -68,14 +71,22 @@ const Targ = struct {
             .optimize = optimize,
         });
 
-        exe.addIncludePath(.{ .path = "../nanovg/src" });
-        exe.addIncludePath(.{ .path = "../nanovg/lib/gl2/include" });
-
         exe.linkSystemLibrary("glfw3");
         exe.linkSystemLibrary("GL");
         exe.linkSystemLibrary("X11");
 
-        exe.addCSourceFile(.{ .file = .{ .path = "../nanovg/lib/gl2/src/glad.c" }, .flags = &.{} });
+        // NOT NEEDED exe.addIncludePath(.{ .path = "../nanovg-zig/src" });
+
+        // Needed
+        exe.addIncludePath(.{ .path = "../nanovg-zig/lib/gl2/include" });
+
+        // Needed
+        exe.addCSourceFile(.{ .file = .{ .path = "../nanovg-zig/lib/gl2/src/glad.c" }, .flags = &.{} });
+
+        // Needed
+        exe.addCSourceFile(.{ .file = .{ .path = "../nanovg-zig/src/fontstash.c" }, .flags = &.{ "-DFONS_NO_STDIO", "-fno-stack-protector" } });
+
+        // NOT NEEDED exe.addCSourceFile(.{ .file = .{ .path = "../nanovg-zig/src/stb_image.c" }, .flags = &.{ "-DSTBI_NO_STDIO", "-fno-stack-protector" } });
 
         b.installArtifact(exe);
 
@@ -87,47 +98,9 @@ const Targ = struct {
         if (b.args) |args| {
             run_cmd.addArgs(args);
         }
-
         run_step.dependOn(&run_cmd.step);
 
-        const zzplot_dep = b.dependency("zzplot_zon_name", .{ // as declared in build.zig.zon
-            .target = target,
-            .optimize = optimize,
-        });
-
-        const zzplot = zzplot_dep.module("zzplot_build_name"); // as declared in build.zig of dependency
-
-        exe.addModule("zzplot_import_name", zzplot); // name to use when importing
-
-        // expose zzplot module to itself
-        zzplot.dependencies.put("zzplot", zzplot) catch @panic("OOM");
-
-        // nanovg static library ===============================================================
-
-        const nanovg = b.addModule("nanovg", .{
-            .source_file = .{ .path = "../nanovg/src/nanovg.zig" },
-        });
-
-        const lib = b.addStaticLibrary(.{
-            .name = "nanovg",
-            .root_source_file = .{ .path = "../nanovg/src/nanovg.zig" },
-            .target = target,
-            .optimize = optimize,
-        });
-        exe.linkLibrary(lib);
-
-        lib.addModule("nanovg", nanovg);
-
-        lib.addIncludePath(.{ .path = "nanovg" });
-
-        lib.addCSourceFile(.{ .file = .{ .path = "../nanovg/src/fontstash.c" }, .flags = &.{ "-DFONS_NO_STDIO", "-fno-stack-protector" } });
-
-        lib.addCSourceFile(.{ .file = .{ .path = "../nanovg/src/stb_image.c" }, .flags = &.{ "-DSTBI_NO_STDIO", "-fno-stack-protector" } });
-
-        lib.linkLibC();
-
-        b.installArtifact(lib);
-
-        _ = test_step;
+        exe.root_module.addImport( "zzplot_import_name",
+            b.dependency("zzplot_zon_name", .{}).module("zzplot_build_name"));
     }
 };
