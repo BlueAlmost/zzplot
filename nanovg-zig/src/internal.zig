@@ -791,8 +791,8 @@ pub const Context = struct {
                 x1 + dx0 * d + dy0 * radius,
                 y1 + dy0 * d + -dx0 * radius,
                 radius,
-                std.math.atan2(f32, dx0, -dy0),
-                std.math.atan2(f32, -dx1, dy1),
+                std.math.atan2(dx0, -dy0),
+                std.math.atan2(-dx1, dy1),
                 .cw,
             );
         } else {
@@ -800,8 +800,8 @@ pub const Context = struct {
                 x1 + dx0 * d + -dy0 * radius,
                 y1 + dy0 * d + dx0 * radius,
                 radius,
-                std.math.atan2(f32, -dx0, dy0),
-                std.math.atan2(f32, dx1, -dy1),
+                std.math.atan2(-dx0, dy0),
+                std.math.atan2(dx1, -dy1),
                 .ccw,
             );
         }
@@ -2081,8 +2081,8 @@ fn roundJoin(dst: *ArrayList(Vertex), p0: Point, p1: Point, lw: f32, rw: f32, lu
         var lx1: f32 = undefined;
         var ly1: f32 = undefined;
         chooseBevel(p1.flags.innerbevel, p0, p1, lw, &lx0, &ly0, &lx1, &ly1);
-        const a0 = std.math.atan2(f32, -dly0, -dlx0);
-        var a1 = std.math.atan2(f32, -dly1, -dlx1);
+        const a0 = std.math.atan2(-dly0, -dlx0);
+        var a1 = std.math.atan2(-dly1, -dlx1);
         if (a1 > a0) a1 -= std.math.pi * 2.0;
 
         dst.addOneAssumeCapacity().set(lx0, ly0, lu, 1);
@@ -2108,8 +2108,8 @@ fn roundJoin(dst: *ArrayList(Vertex), p0: Point, p1: Point, lw: f32, rw: f32, lu
         var rx1: f32 = undefined;
         var ry1: f32 = undefined;
         chooseBevel(p1.flags.innerbevel, p0, p1, -rw, &rx0, &ry0, &rx1, &ry1);
-        const a0 = std.math.atan2(f32, dly0, dlx0);
-        var a1 = std.math.atan2(f32, dly1, dlx1);
+        const a0 = std.math.atan2(dly0, dlx0);
+        var a1 = std.math.atan2(dly1, dlx1);
         if (a1 < a0) a1 += std.math.pi * 2.0;
 
         dst.addOneAssumeCapacity().set(p1.x + dlx0 * rw, p1.y + dly0 * rw, lu, 1);
