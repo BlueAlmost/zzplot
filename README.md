@@ -14,7 +14,7 @@
 
 ***To run:***
 * <ins> clone repository to local disk </ins>
-* <ins> cd examples </ins>
+* <ins> cd zzplot </ins>
 * <ins> zig build </ins> creates handful of executables in the **bin** directory
 * <ins> zig build run </ins> will run all executables simultaneously
 
