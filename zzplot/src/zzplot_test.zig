@@ -1,9 +1,11 @@
 const std = @import("std");
 
-const zzplot = @import("zzplot");
+// const zzplot = @import("zzplot");
 
-test "zzplot dummy test" {
+test "zzplot testing" {
 
-    std.debug.print("just a dummy test - does nothing\n", .{});
-    try std.testing.expectEqual(2, 2);
+    _ = @import("Ticks.zig");
+
+    // std.debug.print("just a dummy test - does nothing\n", .{});
+    // try std.testing.expectEqual(2, 2);
 }

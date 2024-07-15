@@ -16,6 +16,10 @@ const c = @cImport({
 });
 
 pub fn main() !void {
+
+    print("hello\n", .{});
+
+
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
     const allocator = arena.allocator();

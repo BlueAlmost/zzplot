@@ -103,7 +103,6 @@ fn densityMax(k: usize, m_target: usize) f32 {
     }
 }
 
-// pub fn extended(d_min: f32, d_max: f32, m_target: usize, only_loose: bool) Ticks {
 pub fn extended(d_min: f32, d_max: f32, aes: Aes) Ticks {
     const m_target = aes.m_target;
     const only_loose = aes.only_loose;
@@ -116,7 +115,6 @@ pub fn extended(d_min: f32, d_max: f32, aes: Aes) Ticks {
     const w = [_]f32{ 0.25, 0.2, 0.5, 0.05 };
     const MaxIter = 1000;
 
-    // const eps = math.epsilon(f32)*100;
     const eps = math.floatEps(f32) * 100;
 
     if (((d_max - d_min) < eps) or ((d_max - d_min) > math.sqrt(math.floatMax(f32)))) {
@@ -215,8 +213,6 @@ pub fn extended(d_min: f32, d_max: f32, aes: Aes) Ticks {
         .max = l_max_best,
         .inc = l_step_best,
         .aes = aes,
-
-        // .algo = Algo.extended,
     };
 }
 
@@ -289,10 +285,12 @@ pub fn wilkinson(d_min: f32, d_max: f32, aes: Aes) Ticks {
 test {
     const d_min: f32 = 11123;
     const d_max: f32 = 13553;
-    const m_target: usize = 7;
-    const only_loose: bool = false;
 
-    const ticks = Ticks.extended(d_min, d_max, m_target, only_loose);
+    var aes:Aes = undefined;
+    aes.m_target = 7;
+    aes.only_loose = false;
+
+    const ticks = Ticks.extended(d_min, d_max, aes);
 
     try std.testing.expectEqual(ticks.min, 11000);
     try std.testing.expectEqual(ticks.max, 13500);
@@ -302,10 +300,12 @@ test {
 test {
     const d_min: f32 = -123;
     const d_max: f32 = 553;
-    const m_target: usize = 7;
-    const only_loose: bool = false;
 
-    var ticks = Ticks.extended(d_min, d_max, m_target, only_loose);
+    var aes:Aes = undefined;
+    aes.m_target = 7;
+    aes.only_loose = false;
+    
+    var ticks = Ticks.extended(d_min, d_max, aes);
 
     ticks.display();
 
@@ -317,10 +317,12 @@ test {
 test {
     const d_min: f32 = -1023;
     const d_max: f32 = 553;
-    const m_target: usize = 7;
-    const only_loose: bool = false;
 
-    var ticks = Ticks.extended(d_min, d_max, m_target, only_loose);
+    var aes:Aes = undefined;
+    aes.m_target = 7;
+    aes.only_loose = false;
+    
+    var ticks = Ticks.extended(d_min, d_max, aes);
 
     ticks.display();
 
@@ -332,10 +334,12 @@ test {
 test {
     const d_min: f32 = -1023;
     const d_max: f32 = 553;
-    const m_target: usize = 7;
-    const only_loose: bool = true;
 
-    var ticks = Ticks.extended(d_min, d_max, m_target, only_loose);
+    var aes:Aes = undefined;
+    aes.m_target = 7;
+    aes.only_loose = true;
+
+    var ticks = Ticks.extended(d_min, d_max, aes);
 
     ticks.display();
 
@@ -347,9 +351,11 @@ test {
 test {
     const d_min: f32 = 11123;
     const d_max: f32 = 13553;
-    const m_target: usize = 7;
+    
+    var aes:Aes = undefined;
+    aes.m_target = 7;
 
-    const ticks = Ticks.wilkinson(d_min, d_max, m_target);
+    const ticks = Ticks.wilkinson(d_min, d_max, aes);
 
     try std.testing.expectEqual(ticks.min, 11000);
     try std.testing.expectEqual(ticks.max, 14000);
@@ -359,9 +365,11 @@ test {
 test {
     const d_min: f32 = -123;
     const d_max: f32 = 553;
-    const m_target: usize = 11;
+    
+    var aes:Aes = undefined;
+    aes.m_target = 11;
 
-    var ticks = Ticks.wilkinson(d_min, d_max, m_target);
+    var ticks = Ticks.wilkinson(d_min, d_max, aes);
     ticks.display();
 
     try std.testing.expectEqual(ticks.min, -200);
@@ -372,9 +380,11 @@ test {
 test {
     const d_min: f32 = -123;
     const d_max: f32 = 553;
-    const m_target: usize = 3;
+    
+    var aes:Aes = undefined;
+    aes.m_target = 3;
 
-    var ticks = Ticks.wilkinson(d_min, d_max, m_target);
+    var ticks = Ticks.wilkinson(d_min, d_max, aes);
     ticks.display();
 
     try std.testing.expectEqual(ticks.min, -200);
@@ -385,9 +395,11 @@ test {
 test {
     const d_min: f32 = 723;
     const d_max: f32 = 1503;
-    const m_target: usize = 5;
 
-    var ticks = Ticks.wilkinson(d_min, d_max, m_target);
+    var aes:Aes = undefined;
+    aes.m_target = 5;
+
+    var ticks = Ticks.wilkinson(d_min, d_max, aes);
     ticks.display();
 
     try std.testing.expectEqual(ticks.min, 700);

@@ -267,14 +267,14 @@ pub const Context = struct {
     }
 
     pub fn createImageAlpha(ctx: *Context, w: u32, h: u32, flags: ImageFlags, data: []const u8) Image {
-        return Image{ .handle = ctx.params.renderCreateTexture(ctx.params.user_ptr, .alpha, @intCast(w), @intCast(h), flags, data.ptr) catch 0 };
+        return Image{ .handle = ctx.params.renderCreateTexture(ctx.params.user_ptr, .alpha, @intCast(w), @intCast(h), flags, data) catch 0 };
     }
 
     pub fn updateImage(ctx: *Context, image: Image, data: []const u8) void {
-        var w: i32 = undefined;
-        var h: i32 = undefined;
+        var w: u32 = undefined;
+        var h: u32 = undefined;
         _ = ctx.params.renderGetTextureSize(ctx.params.user_ptr, image.handle, &w, &h);
-        _ = ctx.params.renderUpdateTexture(ctx.params.user_ptr, image.handle, 0, 0, w, h, data.ptr);
+        _ = ctx.params.renderUpdateTexture(ctx.params.user_ptr, image.handle, 0, 0, w, h, data);
     }
 
     pub fn beginFrame(ctx: *Context, window_width: f32, window_height: f32, device_pixel_ratio: f32) void {
