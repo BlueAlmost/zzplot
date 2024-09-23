@@ -2,7 +2,7 @@ const std = @import("std");
 
 // const zzplot = @import("zzplot_import_name");
 const zzplot = @import("zzplot_import_name");
-const nvg = @import("nanovg_import_name");
+const nvg = @import("nanovg");
 
 const Color = zzplot.Color;
 const TextAes = zzplot.TextAes;

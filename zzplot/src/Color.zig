@@ -1,4 +1,4 @@
-const Color = @import("nanovg_import_name").Color;
+const Color = @import("nanovg").Color;
 
 // Colors from matplotlib.
 

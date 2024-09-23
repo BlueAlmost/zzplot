@@ -2,8 +2,12 @@
     .name = "zzplot package",
     .version = "0.0.0",
     .dependencies = .{
-        .nanovg_zon_name = .{
-            .path = "../nanovg-zig",
+        // .nanovg_zon_name = .{
+        //     .path = "../nanovg-zig",
+        // },
+        .nanovg = .{
+            .url = "https://github.com/fabioarnold/nanovg-zig/archive/refs/heads/main.tar.gz",
+            .hash = "1220a6a2572713f2a29e54584b060ea19fd89b298bf89baf0b090b85a0a473527d4f",
         },
     },
     .paths = .{""},

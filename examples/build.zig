@@ -61,7 +61,6 @@ pub fn build(b: *std.Build) !void {
 const Targ = struct {
     name: []const u8,
     src: []const u8,
-
     // pub fn build(self: Targ, b: *std.Build, target: anytype, optimize: anytype, run_step: anytype, test_step: anytype) void {
 
     pub fn build(self: Targ, b: *std.Build, target: anytype, optimize: anytype, run_step: anytype) void {
@@ -76,23 +75,34 @@ const Targ = struct {
             .optimize = optimize,
         });
 
+        const nanovg_dep = b.dependency("nanovg", .{ .target = target, .optimize = optimize });
+        // const glad = nanovg_dep.builder.addStaticLibrary(.{ //
+        //     .name = "glad",
+        //     .root_source_file = nanovg_dep.path("lib/gl2/src/glad.c"),
+        //     .target = target,
+        //     .optimize = optimize,
+        // });
+        // const fontstash = nanovg_dep.builder.addStaticLibrary(.{ //
+        //     .name = "fontstash",
+        //     .root_source_file = nanovg_dep.path("src/fontstash.c"),
+        //     .target = target,
+        //     .optimize = optimize,
+        // });
+
+        // exe.linkLibrary(glad);
+        // exe.linkLibrary(fontstash);
+
+        exe.addCSourceFile(.{ .file = nanovg_dep.path("lib/gl2/src/glad.c"), .flags = &.{} });
+        // exe.addCSourceFile(.{ .file = nanovg_dep.path("src/fontstash.c"), .flags = &.{ "-DFONS_NO_STDIO", "-fno-stack-protector" } });
+        // const nanovg_mod = nanovg_dep.module("nanovg");
+        exe.addIncludePath(nanovg_dep.path("lib/gl2/include"));
         exe.linkSystemLibrary("glfw");
+        // exe.linkSystemLibrary("glad");
         exe.linkSystemLibrary("GL");
         exe.linkSystemLibrary("X11");
-
-        // NOT NEEDED exe.addIncludePath(.{ .path = "../nanovg-zig/src" });
-
-        // Needed
-        exe.addIncludePath(.{ .cwd_relative = "../nanovg-zig/lib/gl2/include" });
-
-        // Needed
-        exe.addCSourceFile(.{ .file = b.path("../nanovg-zig/lib/gl2/src/glad.c"), .flags = &.{} });
-
-        // Needed
-        exe.addCSourceFile(.{ .file = b.path("../nanovg-zig/src/fontstash.c"), .flags = &.{ "-DFONS_NO_STDIO", "-fno-stack-protector" } });
-
+        // exe.addIncludePath(b.path("/usr/local/include/glfw"));
+        // exe.addIncludePath(b.path("/usr/local/include/GL"));
         // NOT NEEDED exe.addCSourceFile(.{ .file = .{ .path = "../nanovg-zig/src/stb_image.c" }, .flags = &.{ "-DSTBI_NO_STDIO", "-fno-stack-protector" } });
-
         b.installArtifact(exe);
 
         b.getInstallStep().dependOn(&b.addInstallArtifact(exe, .{ .dest_dir = .{ .override = .{ .custom = "../bin" } } }).step);
@@ -105,7 +115,6 @@ const Targ = struct {
         }
         run_step.dependOn(&run_cmd.step);
 
-        exe.root_module.addImport( "zzplot_import_name",
-            b.dependency("zzplot_zon_name", .{}).module("zzplot_build_name"));
+        exe.root_module.addImport("zzplot_import_name", b.dependency("zzplot", .{}).module("ZZPlot"));
     }
 };

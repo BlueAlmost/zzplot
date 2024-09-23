@@ -1,4 +1,4 @@
-const nvg = @import("nanovg_import_name");
+const nvg = @import("nanovg");
 
 pub fn init(vg: nvg) void {
     const mnsymbol = @embedFile("FontDir/mnsymbol/MnSymbol12.ttf");

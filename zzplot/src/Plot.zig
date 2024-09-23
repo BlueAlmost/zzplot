@@ -1,6 +1,6 @@
 const std = @import("std");
 const zzplot = @import("zzplot_import_name");
-const nvg = @import("nanovg_import_name");
+const nvg = @import("nanovg");
 
 const Allocator = std.mem.Allocator;
 const print = std.debug.print;
