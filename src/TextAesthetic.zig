@@ -1,6 +1,5 @@
-const zzplot = @import("zzplot_import_name");
-const nvg = zzplot.nanovg;
-const Color = zzplot.Color;
+const nvg = @import("nanovg");
+const Color = @import("Color.zig");
 
 str: ?[]const u8 = null,
 font_size: f32 = 20,

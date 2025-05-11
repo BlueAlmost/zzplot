@@ -4,7 +4,7 @@
     .version = "0.0.0",
     .dependencies = .{
         .zzplot = .{
-            .path = "../zzplot",
+            .path = "../",
         },
         .nanovg = .{
             .url = "https://github.com/fabioarnold/nanovg-zig/archive/refs/heads/main.tar.gz",

@@ -1,19 +1,19 @@
 const std = @import("std");
-const zzplot = @import("zzplot_import_name");
 const nvg = @import("nanovg");
 
 const Allocator = std.mem.Allocator;
 const print = std.debug.print;
 
-pub const Color = zzplot.Color;
-pub const Axes = zzplot.Axes;
+const Color = @import("Color.zig");
+const Axes = @import("Axes.zig").Axes;
+const util = @import("util.zig");
 
-const float = zzplot.float;
-const isInt = zzplot.isInt;
-const cpToUTF8 = zzplot.cpToUTF8;
+const int = util.int;
+const float = util.float;
+const cpToUTF8 = util.cpToUTF8;
 
 pub const Aes = @import("PlotAesthetic.zig");
-const TextAes = zzplot.TextAes;
+pub const TextAes = @import("TextAesthetic.zig");
 
 const c = @cImport({
     @cInclude("glad/glad.h");

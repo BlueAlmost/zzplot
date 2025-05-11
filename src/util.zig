@@ -1,9 +1,8 @@
 const std = @import("std");
-const zzplot = @import("zzplot");
 
 const print = std.debug.print;
 
-const Figure = zzplot.Figure;
+const Figure = @import("Figure.zig").Figure;
 
 const c = @cImport({
     @cInclude("glad/glad.h");

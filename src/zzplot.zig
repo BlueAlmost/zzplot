@@ -1,7 +1,3 @@
-const std = @import("std");
-const print = std.debug.print;
-
-pub const zzplot = @import("zzplot_import_name");
 pub const nanovg = @import("nanovg");
 
 pub const Figure = @import("Figure.zig").Figure;
@@ -14,7 +10,7 @@ pub const Ticks = @import("Ticks.zig");
 pub const Plot = @import("Plot.zig").Plot;
 pub const PlotAes = @import("Plot.zig").Aes;
 
-pub const TextAes = @import("TextAesthetics.zig");
+pub const TextAes = @import("TextAesthetic.zig");
 
 pub const createShared = @import("util.zig").createShared;
 pub const Font = @import("Font.zig");

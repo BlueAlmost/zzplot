@@ -1,16 +1,14 @@
 const std = @import("std");
 
-// const zzplot = @import("zzplot_import_name");
-const zzplot = @import("zzplot_import_name");
 const nvg = @import("nanovg");
 
-const Color = zzplot.Color;
-const TextAes = zzplot.TextAes;
-const PlotAes = zzplot.PlotAes;
+const Color = @import("Color.zig");
+const TextAes = @import("TextAesthetic.zig");
+const PlotAes = @import("PlotAesthetic.zig");
 
-const int = zzplot.int;
-const float = zzplot.float;
-const cpToUTF8 = zzplot.cpToUTF8;
+const int = @import("util.zig").int;
+const float = @import("util.zig").float;
+const cpToUTF8 = @import("util.zig").cpToUTF8;
 
 const Allocator = std.mem.Allocator;
 const print = std.debug.print;

@@ -1,6 +1,5 @@
-const zzplot = @import("zzplot_import_name");
-const nvg = zzplot.nanovg;
-const Color = zzplot.Color;
+const nvg = @import("nanovg");
+const Color = @import("Color.zig");
 
 pub const LineStyle = enum {
     none,

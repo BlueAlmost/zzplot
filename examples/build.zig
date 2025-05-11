@@ -96,6 +96,6 @@ const Targ = struct {
         }
         run_step.dependOn(&run_cmd.step);
 
-        exe.root_module.addImport("zzplot_import_name", b.dependency("zzplot", .{}).module("ZZPlot"));
+        exe.root_module.addImport("zzplot", b.dependency("zzplot", .{}).module("ZZPlot"));
     }
 };

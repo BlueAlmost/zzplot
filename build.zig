@@ -12,7 +12,7 @@ pub fn build(b: *std.Build) void {
     });
 
     // Needed
-    zzplot.import_table.put(b.allocator, "zzplot_import_name", zzplot) catch @panic("OOM");
+    // zzplot.import_table.put(b.allocator, "zzplot_import_name", zzplot) catch @panic("OOM");
 
     const nanovg_dep = b.dependency("nanovg", .{ .target = target, .optimize = optimize });
     const nanovg_mod = nanovg_dep.module("nanovg");
