@@ -8,5 +8,5 @@
         },
     },
     .fingerprint = 0x37e627ff9b6ed2c5,
-    .paths = .{""},
+    .paths = .{"src"},
 }
