@@ -1,13 +1,10 @@
 .{
-    .name = "zzplot package",
+    .name = .zzplot,
     .version = "0.0.0",
     .dependencies = .{
-        // .nanovg_zon_name = .{
-        //     .path = "../nanovg-zig",
-        // },
         .nanovg = .{
             .url = "https://github.com/fabioarnold/nanovg-zig/archive/refs/heads/main.tar.gz",
-            .hash = "1220a6a2572713f2a29e54584b060ea19fd89b298bf89baf0b090b85a0a473527d4f",
+            .hash = "1220757eb308a1033f5d33d3d516d504b649f83bf1562f819d06c3f8e24d790c2d00",
         },
     },
     .paths = .{""},
