@@ -87,7 +87,7 @@ pub fn main() !void {
     // here, setting m_targets allows denser ticks
     ax2.set_limits(minMax(f32, .{t}), minMax(f32, .{ x, y }), .{ .m_target = 18 });
 
-    while (fig.live) {
+    while (fig.live and 0 == c.glfwWindowShouldClose(@ptrCast(fig.window))) {
         fig.begin();
 
         ax1.draw();

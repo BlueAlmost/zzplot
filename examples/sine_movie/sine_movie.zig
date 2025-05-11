@@ -70,7 +70,7 @@ pub fn main() !void {
 
     ax.set_limits(.{ 0, n_pts - 1 }, .{ -3, 3 }, .{});
 
-    while (fig.live) {
+    while (fig.live and 0 == c.glfwWindowShouldClose(@ptrCast(fig.window))) {
         fig.begin();
 
         ax.draw();

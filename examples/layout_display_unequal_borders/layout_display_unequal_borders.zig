@@ -69,7 +69,7 @@ pub fn main() !void {
 
     ax.set_limits(.{ 0, 9 }, .{ -10, 10 }, .{});
 
-    while (fig.live) {
+    while (fig.live and 0 == c.glfwWindowShouldClose(@ptrCast(fig.window))) {
         const fs = 24;
         const lw = 5;
         const ms = 55;
