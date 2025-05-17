@@ -110,21 +110,40 @@ pub fn main() !void {
     ax2.set_limits(minMax(f32, .{t}), minMax(f32, .{ x, y }), .{});
 
     while ((fig1.live) or (fig2.live)) {
-        fig1.begin();
 
-        ax1.draw();
-        plt_u.plot(t, u);
-        plt_v.plot(t, v);
+        if (fig1.live){
 
-        fig1.end();
+            if (1  == c.glfwWindowShouldClose(@ptrCast(fig1.window))){
+                fig1.live = false;
+                c.glfwDestroyWindow(@ptrCast(fig1.window));
+            }
+            else {
+                fig1.begin();
 
-        fig2.begin();
+                ax1.draw();
+                plt_u.plot(t, u);
+                plt_v.plot(t, v);
 
-        ax2.draw();
-        plt_x.plot(t, x);
-        plt_y.plot(t, y);
+                fig1.end();
+            }
+        }
 
-        fig2.end();
+        if (fig2.live){
+
+            if( 1 == c.glfwWindowShouldClose(@ptrCast(fig2.window))){
+                fig2.live = false;
+                c.glfwDestroyWindow(@ptrCast(fig2.window));
+            }
+            else {
+                fig2.begin();
+
+                ax2.draw();
+                plt_x.plot(t, x);
+                plt_y.plot(t, y);
+
+                fig2.end();
+            }
+        }
     }
 
     c.glfwTerminate();
