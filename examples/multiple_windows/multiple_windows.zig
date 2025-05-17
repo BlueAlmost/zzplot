@@ -3,7 +3,7 @@ const print = std.debug.print;
 
 pub const genSignals = @import("genSignals.zig").genSignals;
 
-pub const zzplot = @import("zzplot_import_name");
+pub const zzplot = @import("zzplot");
 pub const nvg = zzplot.nanovg;
 
 pub const Figure = zzplot.Figure;

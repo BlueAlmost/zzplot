@@ -3,7 +3,7 @@ const print = std.debug.print;
 
 pub const genSine = @import("genSine.zig").genSine;
 
-pub const zzplot = @import("zzplot_import_name");
+pub const zzplot = @import("zzplot");
 pub const nvg = zzplot.nanovg;
 
 pub const Figure = zzplot.Figure;
@@ -84,7 +84,7 @@ pub fn main() !void {
 
     ax.set_limits(.{ 0, 9 }, .{ -10, 10 }, .{});
 
-    while (fig.live) {
+    while (fig.live and 0 == c.glfwWindowShouldClose(@ptrCast(fig.window))) {
         fig.begin();
 
         ax.draw();
